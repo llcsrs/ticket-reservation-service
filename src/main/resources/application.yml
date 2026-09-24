@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: ticket-reservation-service
+
+  # Ativando Virtual Threads no Spring Boot 3.2+ (Java 21)
+  # Isso melhora significativamente a performance em I/O bloqueante (como chamadas a DB e Redis)
+  threads:
+    virtual:
+      enabled: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/safeticket
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # Apenas para desenvolvimento; em prod usar Flyway/Liquibase
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+server:
+  port: 8080
